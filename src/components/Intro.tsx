@@ -86,7 +86,7 @@ const Intro: FC = () => {
             </motion.p>
 
             <motion.div
-              className="flex flex-col items-center gap-y-2 md:flex-row md:space-x-4"
+              className="flex flex-col items-center gap-y-4 md:flex-row md:space-x-4"
               style={{ opacity: buttonsOpacity, y: buttonsY }}>
               <motion.a
                 href="https://raw.githubusercontent.com/punyaphatsura/punyaphatsura/refs/heads/main/Resume.pdf"
@@ -95,29 +95,31 @@ const Intro: FC = () => {
                 <FileText size={20} className="mr-2" />
                 Resume
               </motion.a>
-              <motion.a
-                href="https://www.linkedin.com/in/punyaphat-surakiatkamjorn-91a1842a2/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-lg bg-sky-950 px-6 py-3 text-sm font-semibold text-white shadow-md ring-2 ring-sky-600 transition-all duration-300 hover:bg-sky-900 focus:outline-none md:text-base">
-                <FaLinkedin className="mr-2 size-5" />
-                LinkedIn
-              </motion.a>
-              <motion.a
-                href="https://github.com/punyaphatsura"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-6 py-3 text-sm font-semibold text-white shadow-md ring-2 ring-white transition-all duration-300 hover:bg-gray-700 focus:outline-none md:text-base">
-                <FaGithub className="mr-2 size-5" />
-                GitHub
-              </motion.a>
+              <motion.div className="flex flex-row space-x-4">
+                <motion.a
+                  href="https://www.linkedin.com/in/punyaphat-surakiatkamjorn-91a1842a2/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center rounded-lg bg-sky-950 px-6 py-3 text-sm font-semibold text-white shadow-md ring-2 ring-sky-600 transition-all duration-300 hover:bg-sky-900 focus:outline-none md:text-base">
+                  <FaLinkedin className="mr-2 size-5" />
+                  LinkedIn
+                </motion.a>
+                <motion.a
+                  href="https://github.com/punyaphatsura"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-6 py-3 text-sm font-semibold text-white shadow-md ring-2 ring-white transition-all duration-300 hover:bg-gray-700 focus:outline-none md:text-base">
+                  <FaGithub className="mr-2 size-5" />
+                  GitHub
+                </motion.a>
+              </motion.div>
             </motion.div>
             <motion.div
               initial="hidden"
               whileInView="show"
               variants={mainVariant}
               className="absolute bottom-0 flex animate-bounce flex-col items-center justify-center">
-              <p className="mb-2 text-xl font-semibold text-slate-600">Slide up</p>
+              <p className="text-md mb-2 font-semibold text-slate-600 md:text-xl">Slide up</p>
               <FaArrowUp color="rgb(71 85 105)" />
             </motion.div>
           </motion.div>

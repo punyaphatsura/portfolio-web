@@ -8,7 +8,6 @@ import Experience from '@components/Experience';
 import { motion, useScroll } from 'framer-motion';
 import Head from 'next/head';
 import { useEffect, useState } from 'react';
-import { FaEnvelope, FaGithub, FaLinkedin, FaPhone } from 'react-icons/fa';
 
 export default function Page() {
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({

@@ -1,4 +1,5 @@
 import './globals.css';
+import DynamicScrollbar from '@/components/DynamicScrollbar';
 import NavBar from '@/components/NavBar';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -18,9 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + ' max-w-screen overflow-x-hidden'}>
+      <body className={inter.className + ' min-w-screen max-w-screen overflow-x-hidden'}>
         <NavBar />
-        {children}
+        <DynamicScrollbar />
+        <div className="flex w-screen">
+          <div className="flex-1">{children}</div>
+          {/* <div className="z-10 h-screen w-1 bg-white" />  Scrollbar */}
+        </div>
       </body>
     </html>
   );

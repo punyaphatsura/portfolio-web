@@ -35,6 +35,8 @@ import Image from 'next/image';
 import React from 'react';
 import { FaLink } from 'react-icons/fa6';
 
+import TechIcon from './TechIcon';
+
 const projects = [
   {
     title: 'Massager WebChat',
@@ -92,7 +94,7 @@ const Project = () => {
     <section id="projects" className="py-16">
       <div className="container mx-auto px-6">
         <motion.p
-          className="mb-6 bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-3xl font-bold text-transparent"
+          className="mb-6 bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-2xl font-bold text-transparent md:text-3xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}>
@@ -113,7 +115,7 @@ const Project = () => {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center text-2xl font-semibold text-zinc-200 underline transition-opacity hover:no-underline hover:opacity-80">
+                      className="flex items-center text-xl font-semibold text-zinc-200 underline transition-opacity hover:no-underline hover:opacity-80 md:text-2xl">
                       <span className="shrink">{project.title}</span>
                       <FaLink size={20} className="ml-2 shrink-0" color="white" />
                     </a>
@@ -141,15 +143,10 @@ const Project = () => {
                   </div>
                   <div className="flex">
                     {project.technologies.map((tech, idx) => (
-                      <Image
-                        key={idx}
-                        alt={tech}
-                        className="mr-3 h-8 w-8 object-contain"
-                        src={baseTechIcons.filter((b) => b.name === tech)[0]?.icon} // Assuming you have tech icons
-                      />
+                      <TechIcon key={idx} tech={tech} />
                     ))}
                   </div>
-                  <p className="text-zinc-400">{project.description}</p>
+                  <p className="text-sm text-zinc-400 md:text-base">{project.description}</p>
                 </div>
               </div>
             </motion.div>

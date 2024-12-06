@@ -54,10 +54,10 @@ const TechStack = () => {
               whileTap={{ scale: 0.9 }}>
               <Image
                 src={tech.icon.src}
-                width={80}
-                height={80}
+                width={48}
+                height={48}
                 alt={tech.name}
-                className="h-12 w-12 object-contain"
+                className="size-8 object-contain md:size-12"
               />
             </motion.div>
           ))}

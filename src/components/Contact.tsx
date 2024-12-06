@@ -23,7 +23,7 @@ const Contact = () => {
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}>
         <h2 className="mb-6 text-3xl font-bold">Get In Touch</h2>
-        <p className="mb-8 text-lg">
+        <p className="mb-8 text-base md:text-lg">
           I{"'"}m always open to discussing new opportunities, creative ideas, or potential
           collaborations. Feel free to reach out to me!
         </p>

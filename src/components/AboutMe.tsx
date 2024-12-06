@@ -42,16 +42,16 @@ const AboutMe = () => {
         transition={{ ease: 'linear', duration: 0.1 }}>
         <div className="container mx-auto px-6 text-center md:text-left">
           <motion.p
-            className="mb-6 bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-center text-3xl font-bold text-transparent"
+            className="mb-6 bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-center text-2xl font-bold text-transparent md:text-3xl"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}>
             About Me
           </motion.p>
           <div className="flex flex-col items-center justify-center md:flex-row">
-            <div className="mb-2 md:mb-0 md:w-1/2">
+            <div className="mb-2 max-w-[1000px] md:mb-0 md:w-[80%]">
               <motion.p
-                className="mb-4 text-center text-lg text-zinc-400"
+                className="mb-4 text-center text-sm text-zinc-400 md:text-lg"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}>
@@ -61,7 +61,7 @@ const AboutMe = () => {
                 products.
               </motion.p>
               <motion.p
-                className="mb-4 text-center text-lg text-zinc-400"
+                className="mb-4 text-center text-sm text-zinc-400 md:text-lg"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.75 }}
@@ -77,7 +77,7 @@ const AboutMe = () => {
       </motion.section>
       <div className="container mx-auto px-6 text-center md:text-left">
         <motion.p
-          className="mb-6 bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-center text-3xl font-bold text-transparent"
+          className="mb-6 bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-center text-2xl font-bold text-transparent md:text-3xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.25 }}>
