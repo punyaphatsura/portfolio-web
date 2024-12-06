@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { FileText } from 'lucide-react';
 import Image from 'next/image';
 import React, { FC, useEffect, useRef, useState } from 'react';
-import { FaArrowUp, FaDownload, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { FaArrowUp, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Intro: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,6 +19,7 @@ const Intro: FC = () => {
   const negTranslateX = useTransform(scrollYProgress, [1, 0.6], [0, -1 * windowWidth]);
 
   const opacity = useTransform(scrollYProgress, [1, 0.6], [1, 0]);
+  const opacitySlideUp = useTransform(scrollYProgress, [1, 0.95], [1, 0]);
 
   const buttonsOpacity = useTransform(scrollYProgress, [1, 0.8], [1, 0]);
   const buttonsY = useTransform(scrollYProgress, [1, 0.8], [0, 200]);
@@ -118,6 +119,8 @@ const Intro: FC = () => {
               initial="hidden"
               whileInView="show"
               variants={mainVariant}
+              style={{ opacity: opacitySlideUp }}
+              transition={{ delay: 3 }}
               className="absolute bottom-0 flex animate-bounce flex-col items-center justify-center">
               <p className="text-md mb-2 font-semibold text-slate-600 md:text-xl">Slide up</p>
               <FaArrowUp color="rgb(71 85 105)" />
