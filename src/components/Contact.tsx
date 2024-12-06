@@ -54,11 +54,13 @@ const Contact = () => {
             href="https://github.com/punyaphatsura"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 transition-colors hover:text-white">
+            className="text-gray-400 transition-colors hover:text-white"
+            aria-label={`Go to Punyaphat Github`}>
             <FaGithub size={32} />
           </a>
           <a
             href="https://linkedin.com/in/punyaphat-surakiatkamjorn-91a1842a2/"
+            aria-label={`Go to Punyaphat Linkedin`}
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 transition-colors hover:text-white">
