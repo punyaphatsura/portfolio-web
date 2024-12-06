@@ -64,7 +64,7 @@ export default function Page() {
       <div className="h-[1500px] w-full">
         <Intro />
       </div>
-      <div className="h-[2000px] w-full">
+      <div className="h-[1500px] w-full md:h-[2000px]">
         <AboutMe />
       </div>
       <Experience />

@@ -33,14 +33,14 @@ const AboutMe = () => {
   }, [scrollY]);
 
   return (
-    <div className="sticky left-0 top-0 flex h-screen flex-col justify-center py-4">
+    <div className="sticky left-0 top-0 flex h-screen w-screen flex-col justify-center py-4">
       <motion.section
         ref={ref}
         id="about"
-        className="mb-4 flex flex-row"
+        className="mb-4 flex w-full flex-row"
         initial={{}}
         transition={{ ease: 'linear', duration: 0.1 }}>
-        <div className="container mx-auto px-6 text-center md:text-left">
+        <div className="mx-auto flex flex-col px-6 text-center md:text-left">
           <motion.p
             className="mb-6 bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-center text-2xl font-bold text-transparent md:text-3xl"
             initial={{ opacity: 0, y: 30 }}
@@ -86,7 +86,8 @@ const AboutMe = () => {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.25 }}>
+          transition={{ delay: 0.25 }}
+          className="flex w-full">
           <TechStack />
         </motion.div>
       </div>

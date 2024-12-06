@@ -18,7 +18,7 @@ const Contact = () => {
   return (
     <section id="contact" className="text-white">
       <motion.div
-        className="container mx-auto flex h-screen flex-col justify-center px-6 text-center"
+        className="container mx-auto flex h-screen flex-col justify-center px-6 pt-20 text-center md:pt-0"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ delay: 1 }}>

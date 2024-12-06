@@ -57,7 +57,7 @@ const Intro: FC = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, type: 'spring', delay: 2 }}
-            style={{ opacity, height: windowHeight - 32 - 48 }}
+            style={{ opacity, height: windowHeight - 32 }}
             className="relative flex w-full flex-col items-center justify-center gap-y-6 overflow-x-hidden text-center">
             <motion.div className="rounded-full bg-white/10 p-2 backdrop-blur-md">
               <Image
@@ -83,7 +83,7 @@ const Intro: FC = () => {
             <motion.p
               className="text-sm text-zinc-400 md:text-lg"
               style={{ x: translateX, transitionProperty: 'all' }}>
-              Hi, I{"'"}m <span className="text-white">Punyaphat</span>, a Full-Stack Developer & UI
+              Hi, I{"'"}m <span className="text-white">Punyaphat</span>, a Full-Stack Engineer & UI
               Designer
             </motion.p>
 

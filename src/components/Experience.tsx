@@ -42,8 +42,8 @@ const experiences = [
     company: 'Playtorium - Internship',
     date: '6/2024 - 7/2024',
     description: [
-      'Developed and enhanced web applications using VueJS and .NET, and contributed to API integration and CI/CD pipeline management with GitLab CI.',
-      'Gained experience in full-stack development through role switching, collaborative projects, and a company hackathon, improving teamwork and problem-solving skills.',
+      'Developed and enhanced web applications using VueJS and .NET, contributing to API integration and CI/CD pipeline management with GitLab CI.',
+      'Gained experience in full-stack development through role rotation, collaborative projects, and participation in a company hackathon, improving teamwork and problem-solving skills.',
     ],
     stack: ['VueJS', 'Asp'],
   },
@@ -52,8 +52,8 @@ const experiences = [
     company: 'AZAI - Freelance',
     date: '12/2023 - 5/2024',
     description: [
-      'Utilized React Native and TypeScript for the development of a real estate management tool for landlords.',
-      "Focused primarily on the front-end, enhancing the application's user interface and experience.",
+      'Developed a real estate management tool for landlords using React Native and TypeScript.',
+      'Implemented features such as real-time chat with socket.io, a signature canvas, room management, parcel management, and a QR code PromptPay generator.',
     ],
     stack: ['React Native', 'TypeScript', 'Next.js'],
   },
@@ -63,7 +63,7 @@ const experiences = [
     date: '01/2023 - 11/2024',
     description: [
       'Designed UX/UI and developed front-end components for websites and applications.',
-      'Utilized NextJS and React Native to create user-friendly interfaces across multiple devices.',
+      'Gained experience with AI chat, social apps, and planning and implementing design systems, user interfaces, and user experiences, etc.',
     ],
     stack: ['Next.js', 'Elysia', 'React Native', 'Figma'],
   },

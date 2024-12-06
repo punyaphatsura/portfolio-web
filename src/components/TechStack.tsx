@@ -45,7 +45,9 @@ const TechStack = () => {
   return (
     <div className="overflow-hidden" ref={ref}>
       <div className="border py-4">
-        <motion.div className="flex w-[5000px] items-center space-x-6 border py-8" style={{ x }}>
+        <motion.div
+          className="flex w-[5000px] items-center space-x-6 border py-4 md:py-8"
+          style={{ x }}>
           {techIcons.map((tech, index) => (
             <motion.div
               key={index}
