@@ -20,12 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className + ' min-w-screen max-w-screen overflow-x-hidden'}>
-        <NavBar />
-        <DynamicScrollbar />
-        <div className="flex w-screen">
-          <div className="flex-1">{children}</div>
-          {/* <div className="z-10 h-screen w-1 bg-white" />  Scrollbar */}
-        </div>
+        <main>
+          <NavBar />
+          <DynamicScrollbar />
+          <div className="flex w-screen">
+            <div className="flex-1">{children}</div>
+          </div>
+        </main>
       </body>
     </html>
   );

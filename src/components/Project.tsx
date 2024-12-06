@@ -115,6 +115,7 @@ const Project = () => {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
+                      aria-label={`${project.title}'s Link`}
                       className="flex items-center text-xl font-semibold text-zinc-200 underline transition-opacity hover:no-underline hover:opacity-80 md:text-2xl">
                       <span className="shrink">{project.title}</span>
                       <FaLink size={20} className="ml-2 shrink-0" color="white" />
@@ -129,6 +130,8 @@ const Project = () => {
                               src={image}
                               className="w-full rounded-xl border border-white object-cover"
                               alt={project.title}
+                              priority
+                              quality={100}
                             />
                           </CarouselItem>
                         ))}

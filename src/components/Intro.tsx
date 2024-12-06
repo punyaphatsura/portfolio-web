@@ -66,6 +66,7 @@ const Intro: FC = () => {
                 height={100}
                 width={100}
                 className="h-20 w-20 select-none rounded-full object-cover"
+                quality={100}
                 priority
               />
             </motion.div>
