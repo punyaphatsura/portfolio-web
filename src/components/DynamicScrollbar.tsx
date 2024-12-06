@@ -24,7 +24,7 @@ const DynamicScrollbar = () => {
 
   return (
     <div
-      className="fixed right-0 top-0 z-50 w-1 bg-white transition-all duration-100"
+      className="fixed right-0 top-0 z-50 w-1 bg-white transition-all duration-100 ease-linear"
       style={{
         height: `${Math.max(0, scrollProgress)}%`,
         backgroundColor: scrollProgress > 99 ? 'green' : 'white',
