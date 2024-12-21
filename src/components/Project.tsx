@@ -9,27 +9,13 @@ import {
   Crafty1,
   Crafty2,
   Crafty3,
+  JarnNai1,
+  JarnNai2,
   MassengerWebChat,
   PaperRef1,
   PaperRef2,
   PersonalWeb,
 } from '@assets/image/project';
-import {
-  Asp,
-  Css,
-  Elysia,
-  Figma,
-  Html,
-  Javascript,
-  MongoDB,
-  Nextjs,
-  Python,
-  ReactIcon,
-  ReactNative,
-  Tailwind,
-  Typescript,
-  VueJS,
-} from '@assets/tech';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
@@ -70,23 +56,14 @@ const projects = [
     link: 'https://github.com/700-38/paper-reference-graph',
     images: [PaperRef1, PaperRef2],
   },
-];
-
-const baseTechIcons = [
-  { name: 'HTML', icon: Html },
-  { name: 'CSS', icon: Css },
-  { name: 'Javascript', icon: Javascript },
-  { name: 'TypeScript', icon: Typescript },
-  { name: 'React', icon: ReactIcon },
-  { name: 'React Native', icon: ReactNative },
-  { name: 'Next.js', icon: Nextjs },
-  { name: 'Tailwind', icon: Tailwind },
-  { name: 'Elysia', icon: Elysia },
-  { name: 'MongoDB', icon: MongoDB },
-  { name: 'Figma', icon: Figma },
-  { name: 'VueJS', icon: VueJS },
-  { name: 'Asp', icon: Asp },
-  { name: 'Python', icon: Python },
+  {
+    title: 'Jarn Nai',
+    description:
+      "Actually, this website shouldn't have been necessary, but the instructor data in the Computer Engineering Department does not include any abbreviations for the instructors. I created this website to spare others from the frustration of guessing and searching for abbreviations, as my friends and I had to. I chose SolidJS for this project because it’s React-like, very fast, and I wanted to explore a framework that isn't as widely used.",
+    technologies: ['Solid.js', 'Astro'],
+    link: 'https://github.com/punyaphatsura/jarn-nai',
+    images: [JarnNai1, JarnNai2],
+  },
 ];
 
 const Project = () => {
