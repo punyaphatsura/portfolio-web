@@ -14,16 +14,11 @@ export default function Page() {
     x: 0,
     y: 0,
   });
-  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
   const { scrollY } = useScroll();
 
   useEffect(() => {
     window.scroll({ behavior: 'smooth', top: 0 });
-  }, []);
-
-  useEffect(() => {
-    setIsPageLoaded(true);
   }, []);
 
   useEffect(() => {
