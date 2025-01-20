@@ -71,7 +71,7 @@ const Intro: FC = () => {
               />
             </motion.div>
             <motion.p
-              className="bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-3xl font-semibold leading-normal text-transparent md:text-6xl"
+              className="bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-3xl font-semibold leading-normal text-transparent md:text-6xl md:leading-tight"
               style={{ x: negTranslateX }}>
               Welcome to My Portfolio
             </motion.p>
