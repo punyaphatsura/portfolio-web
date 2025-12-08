@@ -2,27 +2,19 @@ import profilePic from '@/assets/image/profile.jpg';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { FileText } from 'lucide-react';
 import Image from 'next/image';
-import React, { FC, useEffect, useRef, useState } from 'react';
+import React, { FC, useRef } from 'react';
 import { FaArrowUp, FaGithub, FaLinkedin } from 'react-icons/fa';
 
 const Intro: FC = () => {
   const ref = useRef<HTMLDivElement>(null);
-  const [windowHeight, setWindowHeight] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(0);
-  const [isClientLoaded, setIsClientLoaded] = useState(false);
 
   const { scrollYProgress } = useScroll({
-    offset: ['end end', 'start start'],
+    target: ref,
+    offset: ['start start', 'end start'],
   });
 
-  const translateX = useTransform(scrollYProgress, [1, 0.6], [0, windowWidth]);
-  const negTranslateX = useTransform(scrollYProgress, [1, 0.6], [0, -1 * windowWidth]);
-
-  const opacity = useTransform(scrollYProgress, [1, 0.6], [1, 0]);
-  const opacitySlideUp = useTransform(scrollYProgress, [1, 0.95], [1, 0]);
-
-  const buttonsOpacity = useTransform(scrollYProgress, [1, 0.8], [1, 0]);
-  const buttonsY = useTransform(scrollYProgress, [1, 0.8], [0, 200]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
   const mainVariant = {
     hidden: { opacity: 0, y: 50 },
@@ -33,103 +25,95 @@ const Intro: FC = () => {
     },
   };
 
-  useEffect(() => {
-    setIsClientLoaded(true);
-    setWindowHeight(window.innerHeight);
-    setWindowWidth(window.innerWidth);
-    const onResize = () => {
-      setWindowHeight(window.innerHeight);
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', onResize);
-    return () => {
-      window.scrollTo(0, 0);
-      window.removeEventListener('resize', onResize);
-    };
-  }, []);
-
   return (
-    <div className="sticky left-0 top-0 pb-4">
-      {
-        <>
-          <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, type: 'spring', delay: 2 }}
-            style={{ opacity, height: windowHeight - 32 }}
-            className="relative flex w-full flex-col items-center justify-center gap-y-6 overflow-x-hidden text-center">
-            <motion.div className="rounded-full bg-white/10 p-2 backdrop-blur-md">
-              <Image
-                alt="profile"
-                src={profilePic}
-                height={100}
-                width={100}
-                className="h-20 w-20 select-none rounded-full object-cover"
-                quality={100}
-                priority
-              />
-            </motion.div>
-            <motion.p
-              className="bg-gradient-to-b from-white to-zinc-300 to-90% bg-clip-text text-3xl font-semibold leading-normal text-transparent md:text-6xl md:leading-tight"
-              style={{ x: negTranslateX }}>
-              Welcome to My Portfolio
-            </motion.p>
-            <motion.p
-              className="text-xs text-zinc-400 md:hidden"
-              style={{ x: translateX, transitionProperty: 'all' }}>
-              Better experience on desktop screens.
-            </motion.p>
-            <motion.p
-              className="text-sm text-zinc-400 md:text-lg"
-              style={{ x: translateX, transitionProperty: 'all' }}>
-              Hi, I{"'"}m <span className="text-white">Punyaphat</span>, a Full-Stack Engineer & UI
-              Designer
-            </motion.p>
+    <section
+      ref={ref}
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-20">
+      <motion.div
+        style={{ y, opacity }}
+        className="flex w-full flex-col items-center justify-center gap-y-6 px-4 text-center">
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{
+            type: 'spring',
+            stiffness: 260,
+            damping: 20,
+            delay: 0.1,
+          }}
+          className="rounded-full bg-secondary/30 p-2 ring-1 ring-white/10 backdrop-blur-md">
+          <Image
+            alt="profile"
+            src={profilePic}
+            height={120}
+            width={120}
+            className="h-24 w-24 select-none rounded-full object-cover md:h-32 md:w-32"
+            quality={100}
+            priority
+          />
+        </motion.div>
 
-            <motion.div
-              className="flex flex-col items-center gap-y-4 md:flex-row md:space-x-4"
-              style={{ opacity: buttonsOpacity, y: buttonsY }}>
-              <motion.a
-                href="https://raw.githubusercontent.com/punyaphatsura/punyaphatsura/refs/heads/main/Resume.pdf"
-                download="Punyaphat_Resume.pdf"
-                className="inline-flex w-full items-center justify-center rounded-lg bg-blue-950 px-6 py-3 text-sm font-semibold text-white shadow-md ring-2 ring-blue-600 transition-all duration-300 hover:bg-blue-900 focus:outline-none md:text-base">
-                <FileText size={20} className="mr-2" />
-                Resume
-              </motion.a>
-              <motion.div className="flex flex-row space-x-4">
-                <motion.a
-                  href="https://www.linkedin.com/in/punyaphat-surakiatkamjorn-91a1842a2/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center rounded-lg bg-sky-950 px-6 py-3 text-sm font-semibold text-white shadow-md ring-2 ring-sky-600 transition-all duration-300 hover:bg-sky-900 focus:outline-none md:text-base">
-                  <FaLinkedin className="mr-2 size-5" />
-                  LinkedIn
-                </motion.a>
-                <motion.a
-                  href="https://github.com/punyaphatsura"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex w-full items-center justify-center rounded-lg bg-gray-800 px-6 py-3 text-sm font-semibold text-white shadow-md ring-2 ring-white transition-all duration-300 hover:bg-gray-700 focus:outline-none md:text-base">
-                  <FaGithub className="mr-2 size-5" />
-                  GitHub
-                </motion.a>
-              </motion.div>
-            </motion.div>
-            <motion.div
-              initial="hidden"
-              whileInView="show"
-              variants={mainVariant}
-              style={{ opacity: opacitySlideUp }}
-              transition={{ delay: 3 }}
-              className="absolute bottom-0 flex animate-bounce flex-col items-center justify-center">
-              <p className="text-md mb-2 font-semibold text-slate-600 md:text-xl">Slide up</p>
-              <FaArrowUp color="rgb(71 85 105)" />
-            </motion.div>
-          </motion.div>
-        </>
-      }
-    </div>
+        <div className="space-y-2">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-4xl font-bold !leading-loose tracking-tight text-transparent md:text-6xl lg:text-7xl">
+            Welcome to My Portfolio
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mx-auto max-w-[600px] text-lg text-muted-foreground md:text-xl">
+            Hi, I&apos;m <span className="font-semibold text-foreground">Punyaphat</span>, a
+            Software Engineer
+          </motion.p>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+          <a
+            href="https://raw.githubusercontent.com/punyaphatsura/punyaphatsura/refs/heads/main/Resume.pdf"
+            download="Punyaphat_Resume.pdf"
+            className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+            <FileText className="mr-2 h-4 w-4" />
+            Resume
+          </a>
+          <div className="flex gap-3">
+            <a
+              href="https://www.linkedin.com/in/punyaphat-surakiatkamjorn-91a1842a2/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-lg border border-input bg-background/50 px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+              <FaLinkedin className="mr-2 h-5 w-5 text-[#0077b5]" />
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/punyaphatsura"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center rounded-lg border border-input bg-background/50 px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
+              <FaGithub className="mr-2 h-5 w-5" />
+              GitHub
+            </a>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        variants={mainVariant}
+        initial="hidden"
+        animate="show"
+        className="absolute bottom-10 flex animate-bounce flex-col items-center justify-center gap-2 text-muted-foreground">
+        <span className="text-sm font-medium">Scroll Down</span>
+        <FaArrowUp className="rotate-180" />
+      </motion.div>
+    </section>
   );
 };
 

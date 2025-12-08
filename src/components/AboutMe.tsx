@@ -49,9 +49,9 @@ const AboutMe = () => {
             About Me
           </motion.p>
           <div className="flex flex-col items-center justify-center md:flex-row">
-            <div className="mb-2 max-w-[1000px] md:mb-0 md:w-[80%]">
+            <div className="mb-2 max-w-[1200px] md:mb-0 md:w-[80%]">
               <motion.p
-                className="mb-4 text-center text-sm text-zinc-400 md:text-lg"
+                className="mb-4 text-center text-xs font-light text-zinc-400 md:text-base"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}>
@@ -61,7 +61,7 @@ const AboutMe = () => {
                 products.
               </motion.p>
               <motion.p
-                className="mb-4 text-center text-sm text-zinc-400 md:text-lg"
+                className="mb-4 text-center text-xs font-light text-zinc-400 md:text-base"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.75 }}

@@ -12,6 +12,7 @@ import Python from './python-colored.svg';
 import ReactIcon from './react-colored.svg';
 import ReactNative from './react-native.svg';
 import Solidjs from './solid.svg';
+import Swift from './swift.svg';
 import Tailwind from './tailwindcss-colored.svg';
 import Typescript from './typescript-colored.svg';
 import VueJS from './vuejs-colored.svg';
@@ -34,6 +35,7 @@ export {
   Firebase,
   Solidjs,
   Astro,
+  Swift,
 };
 
 export const baseTechIcons = [
@@ -53,4 +55,5 @@ export const baseTechIcons = [
   { name: 'Python', icon: Python },
   { name: 'Solid.js', icon: Solidjs },
   { name: 'Astro', icon: Astro },
+  { name: 'Swift', icon: Swift },
 ];

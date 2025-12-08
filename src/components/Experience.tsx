@@ -108,7 +108,7 @@ const Experience = () => {
                   </div>
                   <ul className="mt-4 list-inside list-disc space-y-2">
                     {experience.description.map((desc, idx) => (
-                      <li key={idx} className="text-sm text-zinc-400 md:text-base">
+                      <li key={idx} className="text-sm text-zinc-400">
                         {desc}
                       </li>
                     ))}

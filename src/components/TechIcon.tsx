@@ -8,11 +8,19 @@ interface Props {
 
 const TechIcon: FC<Props> = ({ tech }) => {
   return (
-    <Image
-      alt={tech}
-      className="mr-2 size-8 object-contain transition-transform hover:scale-125 active:scale-90 md:mr-3 md:size-10"
-      src={baseTechIcons.filter((b) => b.name === tech)[0]?.icon}
-    />
+    <div className="flex items-center">
+      {baseTechIcons.find((b) => b.name === tech) ? (
+        <Image
+          alt={tech}
+          className="mr-2 size-8 object-contain transition-transform hover:scale-125 active:scale-90 md:mr-3 md:size-10"
+          src={baseTechIcons.find((b) => b.name === tech)!.icon}
+        />
+      ) : (
+        <span className="mr-2 rounded-md bg-zinc-800 px-2 py-1 text-xs font-semibold text-zinc-300 md:mr-3 md:text-sm">
+          {tech}
+        </span>
+      )}
+    </div>
   );
 };
 

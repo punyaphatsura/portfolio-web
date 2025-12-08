@@ -6,7 +6,6 @@ import Intro from '@/components/Intro';
 import Project from '@/components/Project';
 import Experience from '@components/Experience';
 import { motion, useScroll } from 'framer-motion';
-import Head from 'next/head';
 import { useEffect, useState } from 'react';
 
 export default function Page() {
@@ -52,10 +51,6 @@ export default function Page() {
       }}
       transition={{ ease: 'linear', duration: 0.1 }}
       className="max-w-screen h-full bg-black">
-      <Head>
-        <title>Punyaphat Surakiatkamjorn - Portfolio</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
       <div className="h-[1500px] w-full">
         <Intro />
       </div>

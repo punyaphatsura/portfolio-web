@@ -6,11 +6,20 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import {
+  BROKE1,
+  BROKE2,
+  BROKE3,
   Crafty1,
   Crafty2,
   Crafty3,
   JarnNai1,
   JarnNai2,
+  KhongKhunTTS1,
+  KhongKhunTTS2,
+  KhongKhunTTS3,
+  KhongKhunTTS4,
+  KhongKhunTTS5,
+  KhongKhunTTS6,
   MassengerWebChat,
   PaperRef1,
   PaperRef2,
@@ -24,6 +33,29 @@ import { FaLink } from 'react-icons/fa6';
 import TechIcon from './TechIcon';
 
 const projects = [
+  {
+    title: 'KhongKhun TTS — Multilingual Speech Synthesis',
+    description:
+      'My Capstone project: a bilingual (Thai–English) speech translation and dubbing system designed to maintain speaker identity. My primary contribution was building the web infrastructure and internal tools, including "ArenaOfModel" for model comparison, dataset validation tools, and the integration of the ASR → Translation → TTS pipeline into web interfaces for real-time evaluation and public demos.',
+    technologies: ['Next.js', 'Python', 'TypeScript'],
+    link: 'https://github.com/dubbing-ai',
+    images: [
+      KhongKhunTTS1,
+      KhongKhunTTS2,
+      KhongKhunTTS3,
+      KhongKhunTTS4,
+      KhongKhunTTS5,
+      KhongKhunTTS6,
+    ],
+  },
+  {
+    title: 'BROKE — Bank Slip Recorder, Organizer & Knowledge Extractor',
+    description:
+      'BROKE is a customize personal finance app that automatically records expenses and income from Thai bank transfer slips using Gemini’s slip-upload API. It is my first project for learning Swift and SwiftUI, featuring local-first CoreData storage and MVVM architecture. (Inspired by Meow Jot)',
+    technologies: ['Swift'],
+    link: 'https://github.com/punyaphatsura/BROKE-app',
+    images: [BROKE1, BROKE2, BROKE3],
+  },
   {
     title: 'Massager WebChat',
     description:
@@ -85,7 +117,7 @@ const Project = () => {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.75 + index * 0.25 }}>
-              <div className="flex w-full p-6 lg:w-auto">
+              <div className="flex h-full w-full p-6 lg:w-auto">
                 <div className="flex max-w-[1000px] flex-col gap-y-4 rounded-lg bg-white/10 p-6 shadow-sm backdrop-blur-md">
                   <div className="mb-3 flex flex-col">
                     <a
@@ -98,14 +130,14 @@ const Project = () => {
                       <FaLink size={20} className="ml-2 shrink-0" color="white" />
                     </a>
                   </div>
-                  <div className="flex flex-wrap gap-4">
-                    <Carousel>
+                  <div className="flex flex-wrap items-center justify-center gap-4">
+                    <Carousel className="flex items-center justify-center">
                       <CarouselContent className="h-full">
                         {project.images.map((image, idx) => (
                           <CarouselItem key={idx} className="flex justify-center">
                             <Image
                               src={image}
-                              className="w-full rounded-xl border border-white object-cover"
+                              className="max-h-[245px] w-fit rounded-xl border border-white object-contain"
                               alt={project.title}
                               priority
                               quality={100}
@@ -126,7 +158,7 @@ const Project = () => {
                       <TechIcon key={idx} tech={tech} />
                     ))}
                   </div>
-                  <p className="text-sm text-zinc-400 md:text-base">{project.description}</p>
+                  <p className="text-sm text-zinc-400">{project.description}</p>
                 </div>
               </div>
             </motion.div>
