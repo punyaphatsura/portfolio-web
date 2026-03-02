@@ -38,34 +38,45 @@ const baseTechIcons = [
 
 const experiences = [
   {
+    title: 'Software Engineer',
+    company: 'Top Gun Co., Ltd. - Part time/Full time',
+    date: 'JAN 2025 - Present',
+    description: [
+      'Leveraged NX Next.js to implement an Anti-Corruption Layer with Zod and ViewModel transformations; established a strict server-state separation strategy using TanStack Query while developing internal shared packages for Design Systems and API contracts.',
+      'Achieved instantaneous page loads for data-intensive views by architecting a dual-layer caching strategy and optimized static pages using Lighthouse as a primary performance benchmark.',
+      'Developed a Puppeteer-based backend service within an NX NestJS environment to offload complex, personalized image generation from the client, optimizing resource utilization for high-quality assets.',
+    ],
+    stack: ['Next.js', 'React', 'TypeScript'],
+  },
+  {
     title: 'Software Developer',
     company: 'Playtorium - Internship',
-    date: '6/2024 - 7/2024',
+    date: 'JUN 2024 - JUL 2024',
     description: [
-      'Developed and enhanced web applications using VueJS and .NET, contributing to API integration and CI/CD pipeline management with GitLab CI.',
-      'Gained experience in full-stack development through role rotation, collaborative projects, and participation in a company hackathon, improving teamwork and problem-solving skills.',
+      'Developed web applications using Vue.js and .NET, while managing CI/CD pipelines with GitLab.',
+      'Implemented backend transactions, rollbacks, and optimized data management for performance in an agile team environment.',
     ],
     stack: ['VueJS', 'Asp'],
   },
   {
-    title: 'Software Engineer',
-    company: 'AZAI - Freelance',
-    date: '12/2023 - 5/2024',
+    title: 'Freelance Software Engineer',
+    company: 'Freelance',
+    date: 'JAN 2023 - NOV 2024',
     description: [
-      'Developed a real estate management tool for landlords using React Native and TypeScript.',
-      'Implemented features such as real-time chat with socket.io, a signature canvas, room management, parcel management, and a QR code PromptPay generator.',
+      'Developed mobile applications for property management and real estate listings using React Native, Expo, TypeScript, and TailwindCSS; implemented real-time chat via Socket.IO and built a web-based financial tool for bank slip submission and PromptPay QR generation using Next.js.',
+      'Designed and implemented a chatbot-integrated website using Next.js and LangChain, focusing on delivering an intuitive user interface and sophisticated AI interactions.',
     ],
-    stack: ['React Native', 'TypeScript', 'Next.js'],
+    stack: ['React Native', 'TypeScript', 'Next.js', 'Tailwind'],
   },
   {
-    title: 'Software Engineer and UX/UI Designer',
-    company: 'SOpet - Freelance',
-    date: '01/2023 - 11/2024',
+    title: 'Software Developer',
+    company: 'Thailand Post: Journey to Startup Sandbox 2022 Competition',
+    date: '07/2022 - 10/2022',
     description: [
-      'Designed UX/UI and developed front-end components for websites and applications.',
-      'Gained experience with AI chat, social apps, and planning and implementing design systems, user interfaces, and user experiences, etc.',
+      'Competed as a Kotlin Software Developer in the Thailand Post startup initiative, focusing on exceeding customer expectations',
+      'Designed and developed cutting-edge warehouse management applications and achieved 1st place in the competition, showcasing exceptional innovative solutions.',
     ],
-    stack: ['Next.js', 'Elysia', 'React Native', 'Figma'],
+    stack: [],
   },
 ];
 

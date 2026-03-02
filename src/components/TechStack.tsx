@@ -1,36 +1,10 @@
 'use client';
 
-import {
-  Css,
-  Elysia,
-  Figma,
-  Html,
-  Javascript,
-  MongoDB,
-  Nextjs,
-  ReactIcon,
-  ReactNative,
-  Tailwind,
-  Typescript,
-} from '@assets/tech';
+import { baseTechIcons } from '@assets/tech';
 // Import the icons from your assets
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import React, { useRef } from 'react';
-
-const baseTechIcons = [
-  { name: 'HTML', icon: Html },
-  { name: 'CSS', icon: Css },
-  { name: 'Javascript', icon: Javascript },
-  { name: 'TypeScript', icon: Typescript },
-  { name: 'React', icon: ReactIcon },
-  { name: 'React Native', icon: ReactNative },
-  { name: 'Next.js', icon: Nextjs },
-  { name: 'Tailwind', icon: Tailwind },
-  { name: 'Elysia', icon: Elysia },
-  { name: 'MongoDB', icon: MongoDB },
-  { name: 'Figma', icon: Figma },
-];
 
 const techIcons = Array(5).fill(baseTechIcons).flat();
 

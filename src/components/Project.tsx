@@ -36,7 +36,7 @@ const projects = [
   {
     title: 'KhongKhun TTS — Multilingual Speech Synthesis',
     description:
-      'My Capstone project: a bilingual (Thai–English) speech translation and dubbing system designed to maintain speaker identity. My primary contribution was building the web infrastructure and internal tools, including "ArenaOfModel" for model comparison, dataset validation tools, and the integration of the ASR → Translation → TTS pipeline into web interfaces for real-time evaluation and public demos.',
+      'Developed a multilingual Thai–English dubbing system using LLM translation and zero-shot TTS to preserve speaker identity. My role focused on building internal tools, including data validators, demo sites, and the model weight comparison platform, to streamline model comparison and improve the team’s research workflow.',
     technologies: ['Next.js', 'Python', 'TypeScript'],
     link: 'https://github.com/dubbing-ai',
     images: [
@@ -51,7 +51,7 @@ const projects = [
   {
     title: 'BROKE — Bank Slip Recorder, Organizer & Knowledge Extractor',
     description:
-      'BROKE is a customize personal finance app that automatically records expenses and income from Thai bank transfer slips using Gemini’s slip-upload API. It is my first project for learning Swift and SwiftUI, featuring local-first CoreData storage and MVVM architecture. (Inspired by Meow Jot)',
+      '“Bank slip Recorder, Organizer & Knowledge Extractor”, iOS app that extracts expense data from Thai bank slips using Gemini’s slip-upload API and automatically organizes transactions, inspired by Meow Jot. Built with SwiftUI and CoreData, providing a clean UX for recording expenses and preparing future analytics features.',
     technologies: ['Swift'],
     link: 'https://github.com/punyaphatsura/BROKE-app',
     images: [BROKE1, BROKE2, BROKE3],

@@ -55,10 +55,10 @@ const AboutMe = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}>
-                I{"'"}m a full-stack software engineer with a primary focus on front-end
-                development. I love working at the intersection of creativity and technology, and I
-                have a knack for creating user-friendly, aesthetically pleasing, and functional web
-                products.
+                Results-driven Software Engineer with a passion for building user-centric
+                applications that deliver real-world impact. Specialized in the{' '}
+                <span className="font-semibold text-zinc-200">Next.js</span> ecosystem, with
+                experience in optimizing complex systems.
               </motion.p>
               <motion.p
                 className="mb-4 text-center text-xs font-light text-zinc-400 md:text-base"
@@ -67,9 +67,8 @@ const AboutMe = () => {
                 transition={{ delay: 0.75 }}
                 //   viewport={{ once: true }}
               >
-                Whether it{"'"}s websites or web apps, I strive to build digital experiences that
-                are both visually appealing and highly functional. My approach combines technical
-                expertise with a creative mindset to deliver outstanding results.
+                I thrive on creating seamless digital experiences and am always eager to learn new
+                technologies to solve challenges and improve digital products.
               </motion.p>
             </div>
           </div>
