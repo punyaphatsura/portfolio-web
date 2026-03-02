@@ -1,6 +1,8 @@
 import BROKE1 from './broke-1.png';
 import BROKE2 from './broke-2.png';
 import BROKE3 from './broke-3.png';
+import BROKE4 from './broke-4.png';
+import BROKE5 from './broke-5.png';
 import Crafty1 from './crafty-1.png';
 import Crafty2 from './crafty-2.png';
 import Crafty3 from './crafty-3.png';
@@ -36,4 +38,6 @@ export {
   BROKE1,
   BROKE2,
   BROKE3,
+  BROKE4,
+  BROKE5,
 };

@@ -9,6 +9,8 @@ import {
   BROKE1,
   BROKE2,
   BROKE3,
+  BROKE4,
+  BROKE5,
   Crafty1,
   Crafty2,
   Crafty3,
@@ -54,7 +56,7 @@ const projects = [
       '“Bank slip Recorder, Organizer & Knowledge Extractor”, iOS app that extracts expense data from Thai bank slips using Gemini’s slip-upload API and automatically organizes transactions, inspired by Meow Jot. Built with SwiftUI and CoreData, providing a clean UX for recording expenses and preparing future analytics features.',
     technologies: ['Swift'],
     link: 'https://github.com/punyaphatsura/BROKE-app',
-    images: [BROKE1, BROKE2, BROKE3],
+    images: [BROKE1, BROKE2, BROKE3, BROKE4, BROKE5],
   },
   {
     title: 'Massager WebChat',
