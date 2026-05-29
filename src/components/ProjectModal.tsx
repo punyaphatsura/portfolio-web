@@ -17,9 +17,19 @@ export function ProjectModal({
 }) {
   const [slide, setSlide] = useState(0);
   const [morphing, setMorphing] = useState(!!fromRect);
+  const [closing, setClosing] = useState(false);
   const sliderRef = useRef<HTMLDivElement>(null);
   const total = project.images.length;
   const goTo = (idx: number) => setSlide(((idx % total) + total) % total);
+
+  const handleClose = () => {
+    if (window.matchMedia('(max-width: 639px)').matches) {
+      setClosing(true);
+      setTimeout(onClose, 320);
+    } else {
+      onClose();
+    }
+  };
 
   useEffect(() => {
     setSlide(0);
@@ -74,7 +84,7 @@ export function ProjectModal({
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') handleClose();
       if (e.key === 'ArrowLeft') goTo(slide - 1);
       if (e.key === 'ArrowRight') goTo(slide + 1);
     };
@@ -90,12 +100,19 @@ export function ProjectModal({
   }, []);
 
   return createPortal(
-    <div className={cn('pf-modal open', morphing && 'morphing')} role="dialog" aria-modal="true">
-      <div className="pf-modal-backdrop" onClick={onClose} />
+    <div className={cn('pf-modal open', morphing && 'morphing', closing && 'closing')} role="dialog" aria-modal="true">
+      <div className="pf-modal-backdrop" onClick={handleClose} />
       <div className="pf-modal-panel">
-        <button className="pf-modal-close" onClick={onClose} aria-label="Close">
+        {/* Desktop close button */}
+        <button className="pf-modal-close" onClick={handleClose} aria-label="Close">
           ✕
         </button>
+
+        {/* Mobile sticky sheet header */}
+        <div className="modal-sheet-bar">
+          <div className="modal-sheet-handle" />
+          <button className="modal-sheet-close" onClick={handleClose} aria-label="Close">✕</button>
+        </div>
 
         <div className="modal-slider" ref={sliderRef}>
           <div className="slider-track" style={{ transform: `translateX(-${slide * 100}%)` }}>

@@ -2,6 +2,7 @@
 
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { showCopyToast } from '@/lib/toast';
+import { useIsTouchDevice } from '@/hooks/useIsTouchDevice';
 
 const CHARS = '!<>-_\\/[]{}—=+*^?#________';
 
@@ -51,6 +52,7 @@ const Intro: FC = () => {
   const [timeStr, setTimeStr] = useState('');
   const nameRef = useRef<HTMLSpanElement>(null);
   const busyRef = useRef(false);
+  const isTouch = useIsTouchDevice();
 
   useEffect(() => {
     const tick = () => {
@@ -75,6 +77,7 @@ const Intro: FC = () => {
   }, []);
 
   useEffect(() => {
+    if (isTouch) return;
     const onMove = (e: MouseEvent) => {
       if (!nameRef.current) return;
       nameRef.current.querySelectorAll<HTMLElement>('span.ch').forEach((ch) => {
@@ -92,7 +95,7 @@ const Intro: FC = () => {
     };
     window.addEventListener('mousemove', onMove);
     return () => window.removeEventListener('mousemove', onMove);
-  }, []);
+  }, [isTouch]);
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();

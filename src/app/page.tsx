@@ -6,14 +6,17 @@ import Footer from '@/components/Footer';
 import Intro from '@/components/Intro';
 import Project from '@/components/Project';
 import { useEffect, useRef } from 'react';
+import { useIsTouchDevice } from '@/hooks/useIsTouchDevice';
 
 const GAP = 28;
 
 export default function Page() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
+  const isTouch = useIsTouchDevice();
 
   useEffect(() => {
+    if (isTouch) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d')!;
@@ -63,9 +66,10 @@ export default function Page() {
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMove);
     };
-  }, []);
+  }, [isTouch]);
 
   useEffect(() => {
+    if (isTouch) return;
     const cl = document.getElementById('cursor-light');
     if (!cl) return;
     const onMove = (e: MouseEvent) => {
@@ -73,7 +77,7 @@ export default function Page() {
     };
     window.addEventListener('mousemove', onMove);
     return () => window.removeEventListener('mousemove', onMove);
-  }, []);
+  }, [isTouch]);
 
   useEffect(() => {
     const io = new IntersectionObserver(
@@ -107,8 +111,8 @@ export default function Page() {
 
   return (
     <>
-      <canvas ref={canvasRef} id="dot-field" aria-hidden="true" />
-      <div className="cursor-light on" id="cursor-light" aria-hidden="true" />
+      {!isTouch && <canvas ref={canvasRef} id="dot-field" aria-hidden="true" />}
+      {!isTouch && <div className="cursor-light on" id="cursor-light" aria-hidden="true" />}
       <div className="copy-toast" id="copy-toast" aria-live="polite" />
       <div className="kbd-hint" id="kbd-hint" aria-hidden="true">
         <kbd>T</kbd> theme

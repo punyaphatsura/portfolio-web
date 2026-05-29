@@ -978,29 +978,127 @@ footer.pf-footer .wrap {
   border-color: var(--ink);
 }
 
-@media (max-width: 640px) {
+@keyframes sheet-up {
+  from { transform: translateY(100%); opacity: 0; }
+  to   { transform: translateY(0);    opacity: 1; }
+}
+
+@keyframes sheet-down {
+  from { transform: translateY(0);    opacity: 1; }
+  to   { transform: translateY(100%); opacity: 0; }
+}
+
+@keyframes sheet-backdrop {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes sheet-backdrop-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Sheet header — visible only on mobile */
+.modal-sheet-bar {
+  display: none;
+}
+
+@media (max-width: 639px) {
+  /* Bottom sheet layout */
   .pf-modal {
     padding: 0;
+    align-items: flex-end;
   }
 
+  /* Reset desktop transition values — animation drives entry instead */
   .pf-modal-panel {
-    border-radius: 0;
-    max-height: 100vh;
-    height: 100vh;
+    border-radius: 20px 20px 0 0;
+    width: 100%;
+    max-height: 90vh;
+    height: auto;
+    transform: none;
+    opacity: 1;
+    transition: none;
+  }
+
+  .pf-modal.open .pf-modal-panel {
+    transform: none;
+    animation: sheet-up 0.4s cubic-bezier(0.2, 0.7, 0.3, 1) both;
+  }
+
+  .pf-modal.open .pf-modal-backdrop {
+    animation: sheet-backdrop 0.3s ease both;
+  }
+
+  /* Closing animations */
+  .pf-modal.closing .pf-modal-panel {
+    animation: sheet-down 0.32s cubic-bezier(0.4, 0, 0.8, 0) both;
+  }
+
+  .pf-modal.closing .pf-modal-backdrop {
+    animation: sheet-backdrop-out 0.28s ease both;
+  }
+
+  /* Sticky sheet header: drag handle + close button */
+  .modal-sheet-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    padding: 12px 14px 8px;
+    background: var(--bg);
+    flex-shrink: 0;
+  }
+
+  .modal-sheet-handle {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 36px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--rule);
+  }
+
+  .modal-sheet-close {
+    margin-left: auto;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: 14px;
+    transition: background .15s;
+  }
+
+  .modal-sheet-close:hover {
+    background: var(--ink);
+    color: var(--bg);
+  }
+
+  /* Hide desktop absolute close button on mobile */
+  .pf-modal-close {
+    display: none;
   }
 
   .modal-slider {
-    height: 220px;
+    height: 200px;
   }
 
   .modal-meta {
     grid-template-columns: 1fr;
-    padding: 20px;
+    padding: 20px 20px 32px;
     gap: 20px;
   }
 
   .modal-head h3 {
-    font-size: 20px;
+    font-size: 22px;
   }
 }
 
@@ -1019,5 +1117,46 @@ footer.pf-footer .wrap {
   .cursor-light,
   canvas#dot-field {
     display: none;
+  }
+}
+
+/* ── Mobile (phones) ── */
+@media (max-width: 639px) {
+  .wrap {
+    padding: 0 16px;
+  }
+
+  header.hero {
+    padding: 64px 0 48px;
+  }
+
+  header.hero h1 {
+    font-size: 24px;
+  }
+
+  section.pf-section {
+    padding: 48px 0;
+  }
+
+  .work-item {
+    grid-template-columns: 36px 1fr;
+    gap: 12px;
+  }
+
+  .work-meta {
+    display: none;
+  }
+
+  .work-arrow {
+    display: none;
+  }
+
+  .exp-item {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .exp-period {
+    margin-bottom: 2px;
   }
 }
