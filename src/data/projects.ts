@@ -23,6 +23,20 @@ import {
 export const projects = [
   {
     idx: 1,
+    num: '02',
+    name: 'BROKE',
+    sub: 'iOS app for bank-slip expense tracking',
+    year: '2025',
+    role: 'iOS app · sole developer',
+    stack: ['Swift', 'SwiftUI', 'CoreData', 'Gemini API'],
+    summary:
+      "'Bank slip Recorder, Organizer & Knowledge Extractor' — iOS app that extracts expense data from Thai bank slips using Gemini's slip-upload API and automatically organizes transactions, inspired by Meow Jot. Built with SwiftUI and CoreData for a clean UX for recording expenses and a foundation for future analytics.",
+    link: 'github.com/punyaphatsura/BROKE-app',
+    href: 'https://github.com/punyaphatsura/BROKE-app',
+    images: [BROKE1, BROKE2, BROKE3, BROKE4, BROKE5],
+  },
+  {
+    idx: 2,
     num: '01',
     name: 'KhongKhun TTS',
     sub: 'Multilingual Thai–English speech synthesis',
@@ -43,20 +57,6 @@ export const projects = [
     ],
   },
   {
-    idx: 2,
-    num: '02',
-    name: 'BROKE',
-    sub: 'iOS app for bank-slip expense tracking',
-    year: '2024',
-    role: 'iOS app · sole developer',
-    stack: ['Swift', 'SwiftUI', 'CoreData', 'Gemini API'],
-    summary:
-      "iOS app that extracts expense data from Thai bank slips using Gemini's slip-upload API and automatically organizes transactions. Built with SwiftUI and CoreData — clean UX for recording expenses and a foundation for future analytics.",
-    link: 'github.com/punyaphatsura/BROKE-app',
-    href: 'https://github.com/punyaphatsura/BROKE-app',
-    images: [BROKE1, BROKE2, BROKE3, BROKE4, BROKE5],
-  },
-  {
     idx: 3,
     num: '03',
     name: 'Massager',
@@ -65,7 +65,7 @@ export const projects = [
     role: 'Full-stack',
     stack: ['Next.js', 'Tailwind', 'MongoDB', 'Socket.IO'],
     summary:
-      'Real-time chat app with authentication, history, timestamps, private & group chats, emoji support, and typing notifications. Built with Next.js and Socket.IO over MongoDB.',
+      'Final project for Computer Networks. Real-time chat app with authentication, history, timestamps, private & group chats, emoji support, and typing notifications. Built with Next.js and Socket.IO over MongoDB.',
     link: 'github.com/punyaphatsura/network-project',
     href: 'https://github.com/punyaphatsura/network-project',
     images: [MassengerWebChat],
@@ -93,7 +93,7 @@ export const projects = [
     role: 'Visualization lead',
     stack: ['Python', 'Streamlit', 'Gephi'],
     summary:
-      'Data-science project visualizing the reference network of engineering papers from Scopus. I built the interactive Streamlit visualizations and Gephi exports.',
+      'Data science final project visualizing the reference network of engineering papers from Scopus. I built the interactive Streamlit visualizations and Gephi exports.',
     link: 'github.com/700-38/paper-reference-graph',
     href: 'https://github.com/700-38/paper-reference-graph',
     images: [PaperRef1, PaperRef2],
@@ -107,7 +107,7 @@ export const projects = [
     role: 'Sole developer',
     stack: ['Solid.js', 'Astro'],
     summary:
-      "A tiny site solving a daily frustration: the CompEng department's instructor data has no abbreviations. Picked SolidJS because it's React-like, very fast, and I wanted to explore something off the beaten path.",
+      "Built to spare fellow students the frustration of guessing instructor abbreviations — the CompEng department simply doesn't publish them. Picked SolidJS because it's React-like, very fast, and I wanted to explore something off the beaten path.",
     link: 'github.com/punyaphatsura/jarn-nai',
     href: 'https://github.com/punyaphatsura/jarn-nai',
     images: [JarnNai1, JarnNai2],
