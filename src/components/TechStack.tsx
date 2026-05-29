@@ -1,7 +1,6 @@
 'use client';
 
 import { baseTechIcons } from '@assets/tech';
-// Import the icons from your assets
 import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import React, { useRef } from 'react';

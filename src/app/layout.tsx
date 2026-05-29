@@ -1,17 +1,15 @@
 import './globals.css';
-import DynamicScrollbar from '@/components/DynamicScrollbar';
 import NavBar from '@/components/NavBar';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from 'geist/font/sans';
 
 import JsonLd from './components/JsonLd';
 
-const inter = Inter({ subsets: ['latin'] });
-
 export const metadata: Metadata = {
-  title: 'Punyaphat Surakiatkamjorn | Web Developer Portfolio',
+  title: 'Punyaphat Surakiatkamjorn | Software Engineer Portfolio',
   description:
-    'Explore the portfolio of Punyaphat Surakiatkamjorn, a skilled web developer specializing in modern web technologies. Discover my projects, experience, and expertise in creating responsive and dynamic web applications.',
+    'Explore the portfolio of Punyaphat Surakiatkamjorn, a software engineer specializing in the Next.js ecosystem. Discover my projects, experience, and expertise.',
   keywords: [
     'web developer',
     'portfolio',
@@ -20,53 +18,26 @@ export const metadata: Metadata = {
     'Next.js',
     'JavaScript',
     'TypeScript',
-    'web design',
-    'full-stack engineer',
-    'UI designer',
     'software engineer',
   ],
   authors: [{ name: 'Punyaphat Surakiatkamjorn' }],
   creator: 'Punyaphat Surakiatkamjorn',
   publisher: 'Punyaphat Surakiatkamjorn',
   metadataBase: new URL('https://punyaphat-portfolio.vercel.app'),
-  alternates: {
-    canonical: '/',
-  },
+  alternates: { canonical: '/' },
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://punyaphat-portfolio.vercel.app',
-    title: 'Punyaphat Surakiatkamjorn | Web Developer Portfolio',
+    title: 'Punyaphat Surakiatkamjorn | Software Engineer Portfolio',
     description:
-      'Explore the portfolio of Punyaphat Surakiatkamjorn, a skilled web developer specializing in modern web technologies.',
+      'Software engineer building products in the Next.js ecosystem. Currently at Top Gun, Bangkok.',
     siteName: 'Punyaphat Surakiatkamjorn Portfolio',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Punyaphat Surakiatkamjorn - Full-Stack Engineer & UI Designer',
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Punyaphat Surakiatkamjorn | Web Developer Portfolio',
-    description:
-      'Explore the portfolio of Punyaphat Surakiatkamjorn, a skilled web developer specializing in modern web technologies.',
-    creator: '@punyaphat',
-    images: ['/twitter-image.jpg'],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
+    googleBot: { index: true, follow: true },
   },
 };
 
@@ -77,15 +48,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className + ' min-w-screen max-w-screen overflow-x-hidden'}>
+      <body
+        className={`${GeistSans.variable} ${GeistMono.variable}`}
+        style={{ fontFamily: 'var(--font-geist-sans), -apple-system, BlinkMacSystemFont, system-ui, sans-serif' }}>
         <JsonLd />
-        <main>
-          <NavBar />
-          <DynamicScrollbar />
-          <div className="flex w-screen">
-            <div className="flex-1">{children}</div>
-          </div>
-        </main>
+        <NavBar />
+        {children}
       </body>
     </html>
   );
