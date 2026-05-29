@@ -1,119 +1,160 @@
-import profilePic from '@/assets/image/profile.jpg';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { FileText } from 'lucide-react';
-import Image from 'next/image';
-import React, { FC, useRef } from 'react';
-import { FaArrowUp, FaGithub, FaLinkedin } from 'react-icons/fa';
+'use client';
+
+import React, { FC, useEffect, useRef, useState } from 'react';
+
+const CHARS = '!<>-_\\/[]{}—=+*^?#________';
+
+function scrambleText(el: HTMLElement, finalText: string, duration = 600, onDone?: () => void) {
+  const len = finalText.length;
+  const start = performance.now();
+  function frame(now: number) {
+    const t = Math.min(1, (now - start) / duration);
+    let out = '';
+    for (let i = 0; i < len; i++) {
+      const revealAt = (i / len) * 0.7;
+      if (t > revealAt + 0.3) out += finalText[i];
+      else if (finalText[i] === ' ') out += ' ';
+      else out += CHARS[Math.floor(Math.random() * CHARS.length)];
+    }
+    el.textContent = out;
+    if (t < 1) requestAnimationFrame(frame);
+    else {
+      el.textContent = finalText;
+      onDone?.();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+
+function wrapChars(el: HTMLElement) {
+  if (el.querySelector('span.ch')) return;
+  const text = el.textContent ?? '';
+  el.textContent = '';
+  for (const c of text) {
+    const span = document.createElement('span');
+    span.className = 'ch';
+    span.textContent = c === ' ' ? ' ' : c;
+    el.appendChild(span);
+  }
+}
+
+function greetingFor(h: number) {
+  if (h < 5) return 'Up late';
+  if (h < 12) return 'Good morning';
+  if (h < 17) return 'Good afternoon';
+  if (h < 22) return 'Good evening';
+  return 'Up late';
+}
 
 const Intro: FC = () => {
-  const ref = useRef<HTMLDivElement>(null);
+  const [timeStr, setTimeStr] = useState('');
+  const nameRef = useRef<HTMLSpanElement>(null);
+  const busyRef = useRef(false);
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ['start start', 'end start'],
-  });
+  // Live Bangkok time with greeting
+  useEffect(() => {
+    const tick = () => {
+      const bkk = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }));
+      const hh = String(bkk.getHours()).padStart(2, '0');
+      const mm = String(bkk.getMinutes()).padStart(2, '0');
+      const ss = String(bkk.getSeconds()).padStart(2, '0');
+      setTimeStr(`${greetingFor(bkk.getHours())} · ${hh}:${mm}:${ss} BKK`);
+    };
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, []);
 
-  const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  // Scramble once on mount, then wrap chars for magnetic effect
+  useEffect(() => {
+    if (!nameRef.current) return;
+    busyRef.current = true;
+    scrambleText(nameRef.current, 'Punyaphat Surakiatkamjorn', 600, () => {
+      wrapChars(nameRef.current!);
+      busyRef.current = false;
+    });
+  }, []);
 
-  const mainVariant = {
-    hidden: { opacity: 0, y: 50 },
-    show: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5, type: 'spring' },
-    },
+  // Magnetic letter repulsion
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => {
+      if (!nameRef.current) return;
+      nameRef.current.querySelectorAll<HTMLElement>('span.ch').forEach((ch) => {
+        const r = ch.getBoundingClientRect();
+        const dx = e.clientX - (r.left + r.width / 2);
+        const dy = e.clientY - (r.top + r.height / 2);
+        const dist = Math.hypot(dx, dy);
+        if (dist < 140) {
+          const f = (1 - dist / 140) * 8;
+          ch.style.transform = `translate(${(dx / dist) * f}px,${(dy / dist) * f}px)`;
+        } else {
+          ch.style.transform = '';
+        }
+      });
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    navigator.clipboard?.writeText('punyaphat.sura@gmail.com').then(() => {
+      const toast = document.getElementById('copy-toast');
+      if (!toast) return;
+      toast.textContent = 'punyaphat.sura@gmail.com';
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 1800);
+    });
   };
 
   return (
-    <section
-      ref={ref}
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden py-20">
-      <motion.div
-        style={{ y, opacity }}
-        className="flex w-full flex-col items-center justify-center gap-y-6 px-4 text-center">
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{
-            type: 'spring',
-            stiffness: 260,
-            damping: 20,
-            delay: 0.1,
-          }}
-          className="rounded-full bg-secondary/30 p-2 ring-1 ring-white/10 backdrop-blur-md">
-          <Image
-            alt="profile"
-            src={profilePic}
-            height={120}
-            width={120}
-            className="h-24 w-24 select-none rounded-full object-cover md:h-32 md:w-32"
-            quality={100}
-            priority
+    <header className="hero reveal">
+      <div className="wrap">
+        <div className="hero-label">
+          <span
+            style={{
+              width: 6,
+              height: 6,
+              borderRadius: '50%',
+              background: 'var(--dot)',
+              flexShrink: 0,
+              display: 'inline-block',
+            }}
           />
-        </motion.div>
-
-        <div className="space-y-2">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-gradient-to-b from-foreground to-muted-foreground bg-clip-text text-4xl font-bold !leading-loose tracking-tight text-transparent md:text-6xl lg:text-7xl">
-            Welcome to My Portfolio
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mx-auto max-w-[600px] text-lg text-muted-foreground md:text-xl">
-            Hi, I&apos;m <span className="font-semibold text-foreground">Punyaphat</span>, a
-            Software Engineer
-          </motion.p>
+          <span className="live-time">{timeStr || 'Available'}</span>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="flex flex-col gap-3 sm:flex-row sm:gap-4">
+        <h1>
+          <span
+            ref={nameRef}
+            className="scramble"
+            style={{ cursor: 'default' }}>
+            Punyaphat Surakiatkamjorn
+          </span>
+          {' — software engineer building product in the Next.js ecosystem. '}
+          <span className="muted">Currently shipping at Top Gun, Bangkok.</span>
+        </h1>
+        <div className="hero-meta">
+          <a href="mailto:punyaphat.sura@gmail.com" onClick={handleCopyEmail}>
+            Email ↗
+          </a>
+          <a href="https://github.com/punyaphatsura" target="_blank" rel="noopener noreferrer">
+            GitHub ↗
+          </a>
+          <a
+            href="https://www.linkedin.com/in/punyaphat-surakiatkamjorn-91a1842a2/"
+            target="_blank"
+            rel="noopener noreferrer">
+            LinkedIn ↗
+          </a>
           <a
             href="https://raw.githubusercontent.com/punyaphatsura/punyaphatsura/refs/heads/main/Resume.pdf"
-            download="Punyaphat_Resume.pdf"
-            className="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-            <FileText className="mr-2 h-4 w-4" />
-            Resume
+            target="_blank"
+            rel="noopener noreferrer">
+            Résumé ↗
           </a>
-          <div className="flex gap-3">
-            <a
-              href="https://www.linkedin.com/in/punyaphat-surakiatkamjorn-91a1842a2/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg border border-input bg-background/50 px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-              <FaLinkedin className="mr-2 h-5 w-5 text-[#0077b5]" />
-              LinkedIn
-            </a>
-            <a
-              href="https://github.com/punyaphatsura"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-lg border border-input bg-background/50 px-6 py-3 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring">
-              <FaGithub className="mr-2 h-5 w-5" />
-              GitHub
-            </a>
-          </div>
-        </motion.div>
-      </motion.div>
-
-      <motion.div
-        variants={mainVariant}
-        initial="hidden"
-        animate="show"
-        className="absolute bottom-10 flex animate-bounce flex-col items-center justify-center gap-2 text-muted-foreground">
-        <span className="text-sm font-medium">Scroll Down</span>
-        <FaArrowUp className="rotate-180" />
-      </motion.div>
-    </section>
+        </div>
+      </div>
+    </header>
   );
 };
 

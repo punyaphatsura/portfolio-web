@@ -1,65 +1,116 @@
 'use client';
 
-import AboutMe from '@/components/AboutMe';
 import Contact from '@/components/Contact';
+import Experience from '@/components/Experience';
+import Footer from '@/components/Footer';
 import Intro from '@/components/Intro';
 import Project from '@/components/Project';
-import Experience from '@components/Experience';
-import {
-  motion,
-  useMotionTemplate,
-  useMotionValue,
-  useScroll,
-  useSpring,
-  useTransform,
-} from 'framer-motion';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+
+const GAP = 28;
 
 export default function Page() {
-  const { scrollY } = useScroll();
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: -9999, y: -9999 });
 
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 200 };
-  const springX = useSpring(mouseX, springConfig);
-  const springY = useSpring(mouseY, springConfig);
-
-  const absoluteY = useTransform([springY, scrollY], (latest: any[]) => latest[0] + latest[1]);
-
-  const background = useMotionTemplate`radial-gradient(circle at ${springX}px ${absoluteY}px, #0B122A 0%, #000 25%)`;
-
+  // Reactive dot field
   useEffect(() => {
-    window.scroll({ behavior: 'smooth', top: 0 });
-  }, []);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d')!;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let w = 0, h = 0, raf = 0;
 
-  useEffect(() => {
-    const onMouseMove = (event: MouseEvent) => {
-      mouseX.set(event.clientX);
-      mouseY.set(event.clientY);
+    const resize = () => {
+      w = window.innerWidth; h = window.innerHeight;
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
+    resize();
+    window.addEventListener('resize', resize);
 
-    window.addEventListener('mousemove', onMouseMove);
+    const draw = () => {
+      const isDark = document.body.getAttribute('data-theme') === 'dark';
+      const base = isDark ? '255,255,255' : '10,10,10';
+      const { x: mx, y: my } = mouseRef.current;
+      ctx.clearRect(0, 0, w, h);
+      for (let y = GAP / 2; y < h; y += GAP) {
+        for (let x = GAP / 2; x < w; x += GAP) {
+          const dist = Math.hypot(x - mx, y - my);
+          const k = dist < 140 ? 1 - dist / 140 : 0;
+          const r = 0.7 + k * 1.8;
+          const a = (isDark ? 0.18 : 0.16) + k * (isDark ? 0.6 : 0.4);
+          ctx.fillStyle = `rgba(${base},${a})`;
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+      raf = requestAnimationFrame(draw);
+    };
+    raf = requestAnimationFrame(draw);
+
+    const onMove = (e: MouseEvent) => { mouseRef.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener('mousemove', onMove);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMove);
     };
-  }, [mouseX, mouseY]);
+  }, []);
+
+  // Cursor light
+  useEffect(() => {
+    const cl = document.getElementById('cursor-light');
+    if (!cl) return;
+    const onMove = (e: MouseEvent) => {
+      cl.style.transform = `translate(${e.clientX}px,${e.clientY}px) translate(-50%,-50%)`;
+    };
+    window.addEventListener('mousemove', onMove);
+    return () => window.removeEventListener('mousemove', onMove);
+  }, []);
+
+  // Scroll reveal
+  useEffect(() => {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+      { threshold: 0.08, rootMargin: '0px 0px -40px 0px' },
+    );
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
+
+  // Keyboard hint (flash T on load)
+  useEffect(() => {
+    const hint = document.getElementById('kbd-hint');
+    if (!hint) return;
+    let t: ReturnType<typeof setTimeout>;
+    const flash = () => {
+      hint.classList.add('show');
+      clearTimeout(t);
+      t = setTimeout(() => hint.classList.remove('show'), 2400);
+    };
+    const id = setTimeout(flash, 1400);
+    const onKey = (e: KeyboardEvent) => { if (e.key === 't' || e.key === 'T') flash(); };
+    window.addEventListener('keydown', onKey);
+    return () => { clearTimeout(id); clearTimeout(t); window.removeEventListener('keydown', onKey); };
+  }, []);
 
   return (
-    <motion.div
-      initial={{ background: '#080e21' }}
-      style={{ background }}
-      className="max-w-screen h-full bg-black">
-      <div className="h-[1500px] w-full">
-        <Intro />
+    <>
+      <canvas ref={canvasRef} id="dot-field" aria-hidden="true" />
+      <div className="cursor-light on" id="cursor-light" aria-hidden="true" />
+      <div className="copy-toast" id="copy-toast" aria-live="polite" />
+      <div className="kbd-hint" id="kbd-hint" aria-hidden="true">
+        <kbd>T</kbd> theme
       </div>
-      <div className="h-[1500px] w-full md:h-[2000px]">
-        <AboutMe />
-      </div>
-      <Experience />
+      <Intro />
       <Project />
+      <Experience />
       <Contact />
-    </motion.div>
+      <Footer />
+    </>
   );
 }
