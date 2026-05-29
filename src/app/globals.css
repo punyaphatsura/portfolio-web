@@ -394,6 +394,115 @@ section.pf-section h2 {
   margin-top: 2px;
 }
 
+.exp-content {
+  min-width: 0;
+}
+
+.exp-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* Description collapse/expand via grid-rows trick */
+.exp-desc-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.exp-desc-wrap.is-open {
+  grid-template-rows: 1fr;
+}
+
+.exp-desc {
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-top: 8px;
+}
+
+.exp-desc li {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  padding-left: 12px;
+  position: relative;
+}
+
+.exp-desc li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--ink-soft);
+}
+
+/* Chevron — mobile only */
+.exp-chevron {
+  display: none;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+  position: relative;
+}
+
+.exp-chevron::before,
+.exp-chevron::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 1.5px;
+  background: var(--ink-faint);
+  transition: transform 0.25s ease;
+}
+
+.exp-chevron::before {
+  left: 1px;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.exp-chevron::after {
+  right: 1px;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.exp-chevron.is-open::before {
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.exp-chevron.is-open::after {
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Desktop: hover opens, click state ignored */
+@media (hover: hover) {
+  .exp-item {
+    cursor: default;
+  }
+
+  .exp-item:hover .exp-desc-wrap {
+    grid-template-rows: 1fr;
+  }
+}
+
+/* Mobile: click accordion, show chevron */
+@media (hover: none) {
+  .exp-item {
+    cursor: pointer;
+  }
+
+  .exp-chevron {
+    display: block;
+  }
+}
+
 /* ── Stack ── */
 .stack-inline {
   font-size: 15px;
@@ -582,7 +691,8 @@ footer.pf-footer .wrap {
 }
 
 .pv.has-image {
-  background: #111;
+  background: var(--bg);
+  ;
 }
 
 .pv .pv-overlay {
@@ -669,7 +779,7 @@ footer.pf-footer .wrap {
   pointer-events: none;
   overflow: hidden;
   border-radius: 12px;
-  background: #111;
+  background: var(--bg);
   will-change: top, left, width, height, border-radius;
 }
 
@@ -700,6 +810,10 @@ footer.pf-footer .wrap {
 .pf-modal.morphing .pf-modal-close {
   opacity: 0;
   transition: opacity 0.25s;
+}
+
+.pf-modal.morphing .pf-modal-panel {
+  overflow: hidden;
 }
 
 /* ── Project modal ── */
@@ -741,12 +855,17 @@ footer.pf-footer .wrap {
   border-radius: 16px;
   overflow-y: auto;
   overflow-x: hidden;
+  scrollbar-width: none;
   box-shadow: 0 40px 100px -20px rgba(0, 0, 0, .4), 0 0 0 1px var(--rule);
   transform: translateY(20px) scale(0.98);
   opacity: 0;
   transition: transform .35s cubic-bezier(.2, .7, .3, 1), opacity .25s;
   display: flex;
   flex-direction: column;
+}
+
+.pf-modal-panel::-webkit-scrollbar {
+  display: none;
 }
 
 .pf-modal.open .pf-modal-panel {
@@ -782,7 +901,7 @@ footer.pf-footer .wrap {
 /* Slider */
 .modal-slider {
   position: relative;
-  background: #0a0a0a;
+  background: var(--bg);
   flex-shrink: 0;
   height: 320px;
   overflow: hidden;
@@ -809,10 +928,10 @@ footer.pf-footer .wrap {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
+  background: color-mix(in oklab, var(--bg) 70%, transparent);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: #fff;
+  border: 1px solid var(--rule);
+  color: var(--ink);
   cursor: pointer;
   display: grid;
   place-items: center;
@@ -822,7 +941,7 @@ footer.pf-footer .wrap {
 }
 
 .slider-btn:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: color-mix(in oklab, var(--bg) 90%, transparent);
 }
 
 .slider-btn.prev {
@@ -844,8 +963,14 @@ footer.pf-footer .wrap {
   left: 50%;
   transform: translateX(-50%);
   display: flex;
+  align-items: center;
   gap: 6px;
   z-index: 3;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--bg) 70%, transparent);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--rule);
 }
 
 .slider-dot {
@@ -853,14 +978,14 @@ footer.pf-footer .wrap {
   height: 6px;
   border-radius: 50%;
   border: none;
-  background: rgba(255, 255, 255, 0.35);
+  background: color-mix(in oklab, var(--ink) 30%, transparent);
   cursor: pointer;
   padding: 0;
   transition: background .2s, width .2s;
 }
 
 .slider-dot.active {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--ink);
   width: 18px;
   border-radius: 999px;
 }
@@ -873,9 +998,10 @@ footer.pf-footer .wrap {
   font-size: 11px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.35);
+  background: color-mix(in oklab, var(--bg) 70%, transparent);
   backdrop-filter: blur(8px);
-  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
   letter-spacing: 0.05em;
 }
 
