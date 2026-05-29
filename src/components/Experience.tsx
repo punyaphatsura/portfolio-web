@@ -1,33 +1,5 @@
-import React from 'react';
-
-const experiences = [
-  {
-    period: '2025 — Now',
-    role: 'Software Engineer',
-    company: 'Top Gun',
-  },
-  {
-    period: '2023 — 2024',
-    role: 'Freelance Software Engineer',
-    company: 'Independent',
-  },
-  {
-    period: '2024',
-    role: 'Software Developer · Intern',
-    company: 'Playtorium',
-  },
-  {
-    period: '2022',
-    role: 'Software Developer · 1st place',
-    company: 'Thailand Post — Startup Sandbox',
-  },
-];
-
-const stack = [
-  'TypeScript', 'Next.js', 'React', 'React Native',
-  'Swift', 'Python', 'Tailwind', 'TanStack Query',
-  'Zod', 'MongoDB', 'Elysia', 'Figma',
-];
+import { Fragment } from 'react';
+import { experiences, stack } from '@/data/experience';
 
 const Experience = () => {
   return (
@@ -54,10 +26,10 @@ const Experience = () => {
           <h2>Stack</h2>
           <div className="stack-inline">
             {stack.map((item, i) => (
-              <React.Fragment key={item}>
+              <Fragment key={item}>
                 <span>{item}</span>
                 {i < stack.length - 1 && ', '}
-              </React.Fragment>
+              </Fragment>
             ))}
             .
           </div>

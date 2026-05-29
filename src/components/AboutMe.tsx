@@ -1,5 +1,4 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import Image from 'next/image';
+import { motion, useScroll } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
 
 import TechStack from './TechStack';
@@ -7,11 +6,11 @@ import TechStack from './TechStack';
 const AboutMe = () => {
   const ref = useRef(null);
   const [mousePosition, setMousePosition] = useState<{ x: number; y: number }>({
-    x: 0, // Start at the center of the screen
+    x: 0,
     y: 0,
   });
 
-  const { scrollY, scrollYProgress } = useScroll({
+  const { scrollY } = useScroll({
     target: ref,
     offset: ['end end', 'start start'],
   });
@@ -26,7 +25,6 @@ const AboutMe = () => {
 
     window.addEventListener('mousemove', onMouseMove);
 
-    // Clean up the event listener on component unmount
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
     };
@@ -64,9 +62,7 @@ const AboutMe = () => {
                 className="mb-4 text-center text-xs font-light text-zinc-400 md:text-base"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.75 }}
-                //   viewport={{ once: true }}
-              >
+                transition={{ delay: 0.75 }}>
                 I thrive on creating seamless digital experiences and am always eager to learn new
                 technologies to solve challenges and improve digital products.
               </motion.p>

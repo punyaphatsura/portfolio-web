@@ -13,18 +13,22 @@ export default function Page() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: -9999, y: -9999 });
 
-  // Reactive dot field
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d')!;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let w = 0, h = 0, raf = 0;
+    let w = 0;
+    let h = 0;
+    let raf = 0;
 
     const resize = () => {
-      w = window.innerWidth; h = window.innerHeight;
-      canvas.width = w * dpr; canvas.height = h * dpr;
-      canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
@@ -61,7 +65,6 @@ export default function Page() {
     };
   }, []);
 
-  // Cursor light
   useEffect(() => {
     const cl = document.getElementById('cursor-light');
     if (!cl) return;
@@ -72,17 +75,21 @@ export default function Page() {
     return () => window.removeEventListener('mousemove', onMove);
   }, []);
 
-  // Scroll reveal
   useEffect(() => {
     const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }),
+      (entries) =>
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('in');
+            io.unobserve(e.target);
+          }
+        }),
       { threshold: 0.08, rootMargin: '0px 0px -40px 0px' },
     );
     document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
-  // Keyboard hint (flash T on load)
   useEffect(() => {
     const hint = document.getElementById('kbd-hint');
     if (!hint) return;

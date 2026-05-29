@@ -1,6 +1,7 @@
 'use client';
 
 import React, { FC, useEffect, useRef, useState } from 'react';
+import { showCopyToast } from '@/lib/toast';
 
 const CHARS = '!<>-_\\/[]{}—=+*^?#________';
 
@@ -51,7 +52,6 @@ const Intro: FC = () => {
   const nameRef = useRef<HTMLSpanElement>(null);
   const busyRef = useRef(false);
 
-  // Live Bangkok time with greeting
   useEffect(() => {
     const tick = () => {
       const bkk = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Bangkok' }));
@@ -65,7 +65,6 @@ const Intro: FC = () => {
     return () => clearInterval(id);
   }, []);
 
-  // Scramble once on mount, then wrap chars for magnetic effect
   useEffect(() => {
     if (!nameRef.current) return;
     busyRef.current = true;
@@ -75,7 +74,6 @@ const Intro: FC = () => {
     });
   }, []);
 
-  // Magnetic letter repulsion
   useEffect(() => {
     const onMove = (e: MouseEvent) => {
       if (!nameRef.current) return;
@@ -98,13 +96,7 @@ const Intro: FC = () => {
 
   const handleCopyEmail = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigator.clipboard?.writeText('punyaphat.sura@gmail.com').then(() => {
-      const toast = document.getElementById('copy-toast');
-      if (!toast) return;
-      toast.textContent = 'punyaphat.sura@gmail.com';
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 1800);
-    });
+    showCopyToast('punyaphat.sura@gmail.com');
   };
 
   return (
