@@ -22,7 +22,9 @@ const NavBar = () => {
   const toggleTheme = (e: React.MouseEvent) => {
     const next = theme === 'dark' ? 'light' : 'dark';
 
-    if (!document.startViewTransition) {
+    const doc = document as Document & { startViewTransition?: (cb: () => void) => { ready: Promise<void> } };
+
+    if (!doc.startViewTransition) {
       applyTheme(next);
       return;
     }
@@ -31,7 +33,7 @@ const NavBar = () => {
     const y = e.clientY || 40;
     const endR = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
 
-    const transition = document.startViewTransition(() => applyTheme(next));
+    const transition = doc.startViewTransition(() => applyTheme(next));
     transition.ready.then(() => {
       document.documentElement.animate(
         {

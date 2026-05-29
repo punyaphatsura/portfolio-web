@@ -1,12 +1,18 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import type { Project } from '@/data/projects';
+import { cn } from '@/lib/utils';
 import Image, { StaticImageData } from 'next/image';
 import { useCallback, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 
-export function PreviewCard({ project, cycleIndex }: { project: Project | null; cycleIndex: number }) {
+export function PreviewCard({
+  project,
+  cycleIndex,
+}: {
+  project: Project | null;
+  cycleIndex: number;
+}) {
   const cardRef = useRef<HTMLDivElement>(null);
   const targetRef = useRef({ x: 0, y: 0 });
   const currRef = useRef({ x: 0, y: 0 });
